@@ -1,2 +1,24 @@
 ---
 # tasks file for beacon2ri
+
+- name: register os_family variable
+  ansible.builtin.set_fact:
+    os_family: "{{ ansible_facts['os_family'] | default('Suse') }}"
+  tags: deps
+
+- include_tasks: 
+    file: "deps/{{ os_family }}.yml"
+    apply:
+      tags: deps
+  tags: deps
+
+# - import_tasks: user_wrangler.yml
+#   tags: user
+
+# - import_tasks: download_install.yml
+#   tags: install
+
+# - import_tasks: post_install.yml
+#   tags: post
+
+
