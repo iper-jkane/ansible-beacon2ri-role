@@ -1,0 +1,3 @@
+---
+
+A role to install the reference beacon-v2 implementation
