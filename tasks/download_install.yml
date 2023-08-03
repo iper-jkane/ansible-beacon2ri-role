@@ -14,7 +14,7 @@
   ansible.builtin.debug:
     msg: "{{ beacon2ri_root }}"
 
-- name: Fetch beacon2ri code / envs from git
+- name: Fetch¦ beacon2ri code / envs from git
   become: yes
   become_user: "{{ beacon2ri_user }}"
   ansible.builtin.git:
