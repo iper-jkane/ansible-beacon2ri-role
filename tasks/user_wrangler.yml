@@ -1,0 +1,57 @@
+---
+- name: Create group beacon2ri
+  become: yes
+  ansible.builtin.group:
+    state: present
+    name: "{{ beacon2ri_user }}"
+    gid: "{{ beacon2ri_ugid | default(omit) }}"
+
+- name: Create user named beacon2ri
+  become: yes
+  ansible.builtin.user:
+    state: present
+    append: yes
+    name: "{{ beacon2ri_group }}"
+    uid: "{{ beacon2ri_ugid | default(omit) }}"
+    groups:
+      - docker
+
+# Used to filter/run code against only existing users
+- name: GetUsers
+  register: user_shell
+  ansible.builtin.shell: cut -d':' -f 1 /etc/passwd
+
+- name: Set user_list fact
+  ansible.builtin.set_fact:
+    user_list: "{{ user_shell.stdout_lines }}"
+  when: user_shell.stdout_lines is defined
+
+- name: Print user_list
+  ansible.builtin.debug:
+    msg: "{{ user_list }}"
+
+# # TODO: make per user not just "{{ beacon2ri_user }}"
+# # TODO: make a single loop over: user: [template1, template2]
+# - name: Render out beacon2ri user templates
+#   become: yes
+#   ansible.builtin.template:
+#     src: "templates/home/beacon2ri/.bashrc-mongo.j2"
+#     dest: "~{{ item }}/.bashrc-mongo"
+#     owner: "{{ item }}"
+#     # group: "{{ item }}" #beacon2ri_group }}"
+#     mode: 0644
+#   when: ( user_list | length ) > 0 and item in user_list
+#   loop:
+#     - "{{ beacon2ri_user }}"  # /home/beacon2ri/.bashrc-mongo
+
+# - name: Render mongoshrc.js (disableTelemetry)
+#   become: yes
+#   ansible.builtin.template:
+#     src: "templates/home/beacon2ri/.mongoshrc.js.j2"
+#     dest: "~{{ item }}/.mongoshrc.js"
+#     owner: "{{ item }}"
+#     # group: "{{ item }}" #beacon2ri_group }}"
+#     mode: 0644
+#   when: ( user_list | length ) > 0 and item in user_list
+#   loop:
+#     - "{{ beacon2ri_user }}"  # /home/beacon2ri/.bashrc-mongo
