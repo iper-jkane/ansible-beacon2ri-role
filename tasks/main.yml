@@ -30,5 +30,13 @@
 
 - import_tasks: docker_plugin.yml
   tags: [ docker, plugin ]
+
 # - import_tasks: post_install.yml
 #   tags: post
+
+- import_tasks: beacon2-ri-api/configure.yml
+  tags: [ config, api-config ]
+
+- import_tasks: beacon2-ri-api/quirks/pre-build.yml
+  tags: [ quirks, api-quirks ]
+
