@@ -14,3 +14,13 @@
   ansible.builtin.debug:
     msg: "{{ beacon2ri_root }}"
 
+- name: Fetch beacon2ri code / envs from git
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  ansible.builtin.git:
+    repo: "{{ beacon2ri_uri }}/{{ item }}"
+    dest: "{{ beacon2ri_root }}/{{ item }}"
+  loop:
+    "{{ beacon2ri_components }}"
+  environment:
+    GIT_SSL_NO_VERIFY: true
