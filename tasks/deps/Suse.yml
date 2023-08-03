@@ -8,6 +8,7 @@
     name:
       - docker
       - docker-bash-completion
+      - git
       # - tar
       # - gzip
       # - unzip
