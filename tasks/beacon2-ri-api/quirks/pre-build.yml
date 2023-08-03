@@ -1,0 +1,4 @@
+---
+
+- name: Quirks¦ Fix pyyaml deprecated errors
+  ansible.builtin.command: sed -i -e 's|^pyyaml~=.*$|pyyaml~=6.0.1|' "{{ beacon2ri_root }}"/beacon2-ri-api/requirements.txt
