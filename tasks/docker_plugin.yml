@@ -1,0 +1,22 @@
+- name: Set DOCKER_CONFIG env var
+  ansible.builtin.set_fact:
+    DOCKER_CONFIG: "{{ ansible_env.DOCKER_CONFIG | default( '/usr/local/lib/docker' ) }}"
+
+- name: Set docker compose plugin out dir
+  ansible.builtin.set_fact:
+    beacon2ri_docker_compose_plugin_dir: "{{ DOCKER_CONFIG }}/cli-plugins"
+
+- name: Create docker compose plugin dir
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    path: "{{ beacon2ri_docker_compose_plugin_dir }}"
+    mode: 0755
+
+- name: Ensure docker compose plugin
+  become: yes
+  ansible.builtin.get_url:
+    url:  "{{ beacon2ri_docker_compose_plugin_uri }}"
+    dest: "{{ beacon2ri_docker_compose_plugin_dir }}/docker-compose"
+    mode: 0755
+
