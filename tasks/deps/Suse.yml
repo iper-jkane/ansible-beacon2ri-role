@@ -1,12 +1,14 @@
 ---
-- name: Ensure dependencies to install modules
+- name: Ensure system dependencies 
   become: yes
   register: packages_installed
   ansible.builtin.package:
     state: present
     update_cache: yes
     name:
-      - tar
+      - docker
+      - docker-bash-completion
+      # - tar
       # - gzip
       # - unzip
       # - man
