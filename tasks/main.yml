@@ -13,7 +13,11 @@
     os_family: "{{ ansible_facts['os_family'] | default('Suse') }}"
   tags: deps
 
-- include_tasks: 
+- name: Info¦ os_family
+  ansible.builtin.debug:
+    msg: "{{ os_family }}"
+
+- include_tasks:
     file: "deps/{{ os_family }}.yml"
     apply:
       tags: deps
