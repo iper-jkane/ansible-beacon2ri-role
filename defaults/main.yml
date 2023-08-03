@@ -1,8 +1,8 @@
 ---
 # defaults file for beacon2ri
 
-beacon2ri_base_uri: https://github.com/EGA-archive
-beacon2ri_root_prefix: /opt/soft/bio/beacon/b4ri
+beacon2ri_uri: https://github.com/EGA-archive
+beacon2ri_root: /opt/soft/bio/beacon/b2ri
 
 beacon2ri_components:
   - beacon2-ri-api
