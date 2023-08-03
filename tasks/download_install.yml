@@ -8,10 +8,9 @@
     group: "{{ beacon2ri_user }}"
     mode: 0755
   loop:
-    - "{{ beacon2ri_root_prefix }}"
+    - "{{ beacon2ri_root }}"
 
-- name: Info¦ beacon2ri_base_url
+- name: Info¦ beacon2ri_root
   ansible.builtin.debug:
-    msg: "{{ beacon2ri_base_url }}"
-
+    msg: "{{ beacon2ri_root }}"
 
