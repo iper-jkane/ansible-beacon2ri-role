@@ -2,3 +2,15 @@
 
 - name: Quirks¦ Fix pyyaml deprecated errors
   ansible.builtin.command: sed -i -e 's|^pyyaml~=.*$|pyyaml~=6.0.1|' "{{ beacon2ri_root }}"/beacon2-ri-api/requirements.txt
+
+- name: Quirks¦ Create external docker network (not really a quirk)
+  ignore_errors: true
+  register: docker_net_create
+  ansible.builtin.command: docker network create -o com.docker.network.bridge.name="my-app-network" --label my-app-network my-app-network
+  failed_when: "docker_net_create.rc != 0 and docker_net_create.stderr != 'Error response from daemon: network with name my-app-network already exists'"
+  changed_when: "docker_net_create.rc == 0"
+
+
+- name: Info¦ docker_net_create stderr
+  ansible.builtin.debug:
+    msg: "{{ docker_net_create.stderr }}"
