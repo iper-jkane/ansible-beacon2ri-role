@@ -11,3 +11,5 @@ beacon2ri_components:
 
 beacon2ri_user:  beacon
 beacon2ri_group: "{{ beacon2ri_user }}"
+
+beacon2ri_docker_compose_plugin_uri: https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64
