@@ -7,7 +7,6 @@
 # optionally install psfmd
 
 
-
 - name: register os_family variable
   ansible.builtin.set_fact:
     os_family: "{{ ansible_facts['os_family'] | default('Suse') }}"
