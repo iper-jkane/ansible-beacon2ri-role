@@ -1,0 +1,11 @@
+- name: Render out beacon2ri-api config
+  become: yes
+  ansible.builtin.template:
+    src: "templates/{{ item.0 }}"
+    dest: "{{ item.1 }}"
+    owner: root
+    group: root
+    mode: 0644
+    output_encoding: utf-8
+  loop:
+    - [ "beacon2ri_root/beacon2-ri-api/deploy/conf.py.j2", "{{ beacon2ri_root }}/beacon2-ri-api/deploy/conf.py" ]
