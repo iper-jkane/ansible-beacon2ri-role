@@ -1,0 +1,25 @@
+---
+
+# - name: Quirks¦ Fix ubuntu version in tools Dockerfile
+#   become: yes
+#   become_user: "{{ beacon2ri_user }}"
+#   ansible.builtin.command: sed -i -e 's|^FROM ubuntu$|FROM ubuntu:20.04|' "{{ beacon2ri_root }}"/beacon2-ri-tools/Dockerfile
+
+- name: Quirks¦ Fix ubuntu version in tools Dockerfile
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  ansible.builtin.lineinfile:
+    path: "{{ beacon2ri_root }}"/beacon2-ri-tools/Dockerfile
+    regexp: '^FROM ubuntu$'
+    line: FROM ubuntu:20.04
+
+
+- name: Quirks¦ Add non-interactive DEBIAN_FRONTEND to tools Dockerfile
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  ansible.builtin.lineinfile:
+    path: "{{ beacon2ri_root }}"/beacon2-ri-tools/Dockerfile
+    regexp: '^# Build env'
+    insertafter: '^# Build env'
+    line: 'ENV DEBIAN_FRONTEND=noninteractive'
+

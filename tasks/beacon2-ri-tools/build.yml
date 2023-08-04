@@ -1,0 +1,12 @@
+---
+
+- name: Task¦ docker compose build beacon2-ri-api
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  vars:
+    ansible_python_interpreter: "{{ beacon2ri_root }}/python/docker/compose/bin/python3"
+  community.docker.docker_image:
+    name: crg/beacon2_ri:latest
+    source: build
+    build:  
+      path: "{{ beacon2ri_root }}/beacon2-ri-tools"
