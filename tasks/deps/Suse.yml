@@ -9,6 +9,7 @@
       - docker
       - docker-bash-completion
       - git
+      - python3-pip
       # - tar
       # - gzip
       # - unzip
