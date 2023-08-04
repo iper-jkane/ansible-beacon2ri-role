@@ -9,7 +9,7 @@
   become: yes
   become_user: "{{ beacon2ri_user }}"
   ansible.builtin.lineinfile:
-    path: "{{ beacon2ri_root }}"/beacon2-ri-tools/Dockerfile
+    path: "{{ beacon2ri_root }}/beacon2-ri-tools/Dockerfile"
     regexp: '^FROM ubuntu$'
     line: FROM ubuntu:20.04
 
@@ -18,7 +18,7 @@
   become: yes
   become_user: "{{ beacon2ri_user }}"
   ansible.builtin.lineinfile:
-    path: "{{ beacon2ri_root }}"/beacon2-ri-tools/Dockerfile
+    path: "{{ beacon2ri_root }}/beacon2-ri-tools/Dockerfile"
     regexp: '^# Build env'
     insertafter: '^# Build env'
     line: 'ENV DEBIAN_FRONTEND=noninteractive'
