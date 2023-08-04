@@ -13,13 +13,14 @@
 - name: Info¦ beacon2ri_root
   ansible.builtin.debug:
     msg: "{{ beacon2ri_root }}"
-
+  
 - name: Fetch¦ beacon2ri code / envs from git
   become: yes
   become_user: "{{ beacon2ri_user }}"
   ansible.builtin.git:
     repo: "{{ beacon2ri_uri }}/{{ item }}"
     dest: "{{ beacon2ri_root }}/{{ item }}"
+    force: "{{ force | default(omit) }}"
   loop:
     "{{ beacon2ri_components }}"
   environment:
