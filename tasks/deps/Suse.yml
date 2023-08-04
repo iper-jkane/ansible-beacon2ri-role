@@ -18,3 +18,9 @@
 - name: Info¦ packages installed?
   ansible.builtin.debug:
     msg: "{{ packages_installed }}"
+
+- name: Task¦ Start docker service
+  become: yes
+  ansible.builtin.service:
+    name: docker
+    state: started
