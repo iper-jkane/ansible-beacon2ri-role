@@ -1,16 +1,30 @@
 ---
 
 - name: Quirks¦ Fix pyyaml deprecated errors
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
   ansible.builtin.command: sed -i -e 's|^pyyaml~=.*$|pyyaml~=6.0.1|' "{{ beacon2ri_root }}"/beacon2-ri-api/requirements.txt
 
 - name: Quirks¦ Create external docker network (not really a quirk)
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
   ignore_errors: true
   register: docker_net_create
   ansible.builtin.command: docker network create -o com.docker.network.bridge.name="my-app-network" --label my-app-network my-app-network
   failed_when: "docker_net_create.rc != 0 and docker_net_create.stderr != 'Error response from daemon: network with name my-app-network already exists'"
   changed_when: "docker_net_create.rc == 0"
 
-
 - name: Info¦ docker_net_create stderr
   ansible.builtin.debug:
     msg: "{{ docker_net_create.stderr }}"
+
+- name: Task¦ install docker compose ansible virtualenv
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  ansible.builtin.pip:
+    virtualenv_command: python3 -m venv --copies
+    virtualenv: "{{ beacon2ri_root }}/python/docker/compose"
+    name:
+      - docker
+      - docker-compose
+      - pyyaml
