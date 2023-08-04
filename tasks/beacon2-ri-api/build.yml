@@ -1,0 +1,20 @@
+---
+
+- name: Task¦ docker compose build beacon2-ri-api 
+  become: yes
+  become_user: "{{ beacon2ri_user }}"
+  vars: 
+    ansible_python_interpreter: "{{ beacon2ri_root }}/python/docker/compose/bin/python3"
+  community.docker.docker_compose:
+    build: true
+    project_src: "{{ beacon2ri_root }}/beacon2-ri-api/deploy"
+    services:
+      - training-ui 
+      - db 
+      - mongo-express 
+      - beacon 
+      - permissions 
+      - idp 
+      - idp-db
+    #files: beacon-network-host-compose.yml # not yet, copy from biotask
+
