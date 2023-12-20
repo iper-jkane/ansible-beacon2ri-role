@@ -8,4 +8,4 @@
     mode: 0644
     output_encoding: utf-8
   loop:
-    - [ "beacon2ri_root/beacon2-ri-api/deploy/conf.py.j2", "{{ beacon2ri_root }}/beacon2-ri-api/deploy/conf.py" ]
+    - [ "beacon2-ri-api/deploy/conf.py.j2", "{{ beacon2ri_root }}/beacon2-ri-api/deploy/conf.py" ]
