@@ -1,0 +1,11 @@
+### Configure, prep + build env (aka install?)
+
+- import_tasks: configure.yml
+  tags: [ install, config, api-config ]
+
+- import_tasks: quirks/pre-build.yml
+  tags: [ install, quirks, api-quirks ]
+
+- import_tasks: build.yml
+  tags: [ build, api-build ]
+
