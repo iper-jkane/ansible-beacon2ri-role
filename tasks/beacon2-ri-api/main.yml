@@ -7,5 +7,5 @@
   tags: [ install, quirks, api-quirks ]
 
 - import_tasks: build.yml
-  tags: [ build, api-build ]
+  tags: [ install, build, api-build ]
 
