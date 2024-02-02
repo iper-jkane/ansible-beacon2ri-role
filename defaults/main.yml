@@ -7,7 +7,6 @@ beacon2ri_root: /opt/soft/bio/beacon/b2ri
 beacon2ri_components:
   - beacon2-ri-api
   - beacon2-ri-tools
-  - beacon2-ri-ui
 
 beacon2ri_user:  beacon
 beacon2ri_group: "{{ beacon2ri_user }}"
