@@ -34,11 +34,6 @@
 # - import_tasks: post_install.yml
 #   tags: post
 
+# also builds beacon2-ri-tools
 - import_tasks: beacon2-ri-api/main.yml
   tags: [ build, config, install, quirks ]
-
-- import_tasks: beacon2-ri-tools/quirks/pre-build.yml
-  tags: [ install, quirks, tools-quirks ]
-
-- import_tasks: beacon2-ri-tools/build.yml
-  tags: [ build, tools-build ]

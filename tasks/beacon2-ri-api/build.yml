@@ -9,7 +9,7 @@
     build: true
     project_src: "{{ beacon2ri_root }}/beacon2-ri-api/deploy"
     services:
-#      - training-ui 
+      - beacon-ri-tools
       - db 
       - mongo-express 
       - beacon 
