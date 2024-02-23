@@ -8,13 +8,13 @@
   community.docker.docker_compose:
     build: true
     project_src: "{{ beacon2ri_root }}/beacon2-ri-api/deploy"
-    services:
-#      - training-ui 
-      - db 
-      - mongo-express 
-      - beacon 
-      - permissions 
-      - idp 
-      - idp-db
+#    services:
+#      - frontend
+#      - db 
+#      - mongo-express 
+#      - beacon 
+#      - permissions 
+#      - idp 
+#      - idp-db
     #files: beacon-network-host-compose.yml # not yet, copy from biotask
 
