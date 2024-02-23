@@ -1,9 +1,38 @@
 ---
 
+- name: Register os_family variable
+  ansible.builtin.set_fact:
+    os_family: "{{ ansible_facts['os_family'] | default('Suse') }}"
+  tags: deps
+
 - name: Quirks¦ Fix pyyaml deprecated errors
   become: yes
   become_user: "{{ beacon2ri_user }}"
   ansible.builtin.command: sed -i -e 's|^pyyaml~=.*$|pyyaml~=6.0.1|' "{{ beacon2ri_root }}"/beacon2-ri-api/requirements.txt
+
+- block:
+    - name: Quirks¦ wrangle keycloak image; ensure jboss
+      become: yes 
+      ansible.builtin.replace:
+        path: "{{ beacon2ri_root }}/beacon2-ri-api/deploy/docker-compose.yml"
+        regexp: '^(\s+)#(image: jboss/keycloak)'
+        replace: '\1\2'
+
+    - name: Quirks¦ wrangle keycloak image; remove sleighzy
+      become: yes
+      ansible.builtin.replace:
+        path: "{{ beacon2ri_root }}/beacon2-ri-api/deploy/docker-compose.yml"
+        regexp: '^(\s+)(image: sleighzy/keycloak)'
+        replace: '\1#\2'
+
+  when: os_family == 'Suse'
+
+- name: Quirks¦ wrangle keycloak docker configf
+  become: yes
+  ansible.builtin.replace:
+    path: "{{ beacon2ri_root }}/beacon2-ri-api/deploy/docker-compose.yml"
+    regexp: '^(\s+)(\- KEYCLOAK_HOSTNAME=)localhost'
+    replace: '\1\2{{ ansible_hostname }}'
 
 - name: Quirks¦ Create external docker network (not really a quirk)
   become: yes
