@@ -57,3 +57,4 @@
       - docker
       - docker-compose
       - pyyaml
+      - httpie
