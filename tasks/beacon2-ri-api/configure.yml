@@ -3,7 +3,7 @@
   ansible.builtin.template:
     src: "templates/{{ item.0 }}"
     dest: "{{ item.1 }}"
-    owner: root
+    owner: "{{ beacon2ri_user }}"
     group: root
     mode: 0644
     output_encoding: utf-8
